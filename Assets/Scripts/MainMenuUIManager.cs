@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuUIManager : MonoBehaviour
 {
@@ -15,7 +16,12 @@ public class MainMenuUIManager : MonoBehaviour
         
     }
 
-    public void exitGame()
+    public void startButtonClicked()
+    {
+        SceneManager.LoadScene("main");
+    }
+
+    public void exitButtonClicked()
     {
         #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
