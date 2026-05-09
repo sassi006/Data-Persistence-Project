@@ -18,9 +18,31 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
+    private string username;
     
     // Start is called before the first frame update
     void Start()
+    {
+        if (PersistentData.Instance != null)
+        {
+            username = PersistentData.Instance.GetUsername();
+        }
+        else
+        {
+            username = "No Name";
+        }
+        
+        m_Points = 0;
+        UpdateScoreText();
+        SetupBricks();
+    }
+
+    private void UpdateScoreText()
+    {
+        ScoreText.text = $"{username}\n Score : {m_Points}";
+    }
+    
+    private void SetupBricks()
     {
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
@@ -37,7 +59,7 @@ public class MainManager : MonoBehaviour
             }
         }
     }
-
+    
     private void Update()
     {
         if (!m_Started)
@@ -65,7 +87,7 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        UpdateScoreText();
     }
 
     public void GameOver()
