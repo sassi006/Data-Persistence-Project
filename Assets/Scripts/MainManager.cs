@@ -19,24 +19,48 @@ public class MainManager : MonoBehaviour
     private bool m_GameOver = false;
 
     private string username;
+    private LeaderBoard leaderboard;
     
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize variables
         if (PersistentData.Instance != null)
         {
+            // Initialize variables using persistent data
             username = PersistentData.Instance.GetUsername();
+            leaderboard = PersistentData.Instance.GetLeaderboard();
+            PersistentData.Instance.LoadLeaderboard();
         }
         else
         {
             username = "No Name";
+            // Initialize other variables
         }
         
         m_Points = 0;
         UpdateScoreText();
+        InitializeLeaderBoardText();
+        UpdateLeaderBoardText();
         SetupBricks();
     }
 
+    private void InitializeLeaderBoardText()
+    {
+        // When game starts, create and fill out leaderboard
+        for (int i = 0; i < leaderboard.GetSize(); i++)
+        {
+            // Make a text field for each leaderboard entry
+        }
+        
+        
+    }
+    
+    private void UpdateLeaderBoardText()
+    {
+        // Load leaderboard text from file
+    }
+    
     private void UpdateScoreText()
     {
         ScoreText.text = $"{username}\n Score : {m_Points}";
